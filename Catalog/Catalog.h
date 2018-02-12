@@ -291,6 +291,11 @@ class Catalog {
   int32_t getTableEpoch(const int32_t db_id, const int32_t table_id) const;
   void setTableEpoch(const int db_id, const int table_id, const int new_epoch);
 
+  const ColumnDescriptor* getDeletedColumn(const TableDescriptor* td) const;
+
+ private:
+  void setDeletedColumn(const TableDescriptor* td, const ColumnDescriptor* cd);
+
  protected:
   void CheckAndExecuteMigrations();
   void updateDictionaryNames();
@@ -358,6 +363,7 @@ class Catalog {
   int nextTempTableId_;
   int nextTempDictId_;
   const bool access_priv_check_;  // if true, verify user access privileges to DB objects
+  std::unordered_map<const TableDescriptor*, const ColumnDescriptor*> deletedColumnPerTable_;
 };
 
 /*
