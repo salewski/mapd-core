@@ -1065,6 +1065,7 @@ class Executor {
   llvm::Value* castToTypeIn(llvm::Value* val, const size_t bit_width);
   llvm::Value* castToIntPtrTyIn(llvm::Value* val, const size_t bit_width);
 
+  RelAlgExecutionUnit addDeletedColumnFilter(const RelAlgExecutionUnit& ra_exe_unit);
   void allocateLocalColumnIds(const std::list<std::shared_ptr<const InputColDescriptor>>& global_col_ids);
   int getLocalColumnId(const Analyzer::ColumnVar* col_var, const bool fetch_column) const;
 
